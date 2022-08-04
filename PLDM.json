@@ -1,0 +1,102 @@
+{
+  "PLDM" :
+  [
+    {
+        "Package Header Revision" : 01,
+        "Package Version String Type" : "ASCII",
+        "Package Version String" : "145.02.01.01",
+    },
+    {
+        "Firmware Device List" :
+        [
+            {
+                "Component Image Set Version String Type" : "ASCII",
+                "Applicable Components" : [0,1],
+                "Component Image Set Version String" : "145.02.01.01",
+                "Record Descriptors" :[{
+                  "Initial Descriptor Type" : "PCI Vendor ID",
+                  "Initial Descriptor Data" : "0010",
+                },
+                {
+                  "Initial Descriptor Type" : "PCI Device ID",
+                  "Initial Descriptor Data" : "B200",
+                },
+                {
+                  "Initial Descriptor Type" : "PCI Subsystem ID",
+                  "Initial Descriptor Data" : "7800",
+                },
+                {
+                  "Initial Descriptor Type" : "PCI Subsystem Vendor ID",
+                  "Initial Descriptor Data" : "2D15",
+                }
+                ]
+            },
+            {
+                "Component Image Set Version String Type" : "ASCII",
+                "Applicable Components" : [50,2],
+                "Component Image Set Version String" : "156.056.08.02",
+                "Record Descriptors" :[{
+                  "Initial Descriptor Type" : "PCI Vendor ID",
+                  "Initial Descriptor Data" : "0010",
+                },
+                {
+                  "Initial Descriptor Type" : "PCI Device ID",
+                  "Initial Descriptor Data" : "B200",
+                },
+                {
+                  "Initial Descriptor Type" : "PCI Subsystem ID",
+                  "Initial Descriptor Data" : "7800",
+                },
+                {
+                  "Initial Descriptor Type" : "PCI Subsystem Vendor ID",
+                  "Initial Descriptor Data" : "2D08",
+                }
+                ]
+            },
+          ],
+    },
+    {
+        "Component Image Information List" :
+        [
+            {
+                  "Component Classification" : "Firmware",
+                  "Component Identifier" : "1000",
+                  "Component Options" : "Force Update",
+                  "Requested Component Activation Method" :
+                  [
+                    "System reboot",
+                    "DC power cycle",
+                    "AC power cycle"
+                  ],
+                  "Component Image" : "img_0.bin",
+                  "Component Version String Type" : "ASCII",
+                  "Component Version String" : "12.032.01.01",
+            },
+            {
+                  "Component Classification" : "Firmware",
+                  "Component Identifier" : "1FF0",
+                  "Component Options" : "Force Update",
+                  "Requested Component Activation Method" :[
+                    "Medium-specific reset"
+                  ],
+                  "Component Image" : "img_1.bin",
+                  "Component Version String Type" : "ASCII",
+                  "Component Version String" : "106.08.08.02",
+            },
+            {
+                  "Component Classification" : "Driver",
+                  "Component Identifier" : "1FA0",
+                  "Component Options" : "Force Update",
+                  "Requested Component Activation Method" :[
+                    "Self-Contained",
+                    "AC power cycle"
+                  ],
+                  "Component Image" : "img_2.bin",
+                  "Component Version String Type" : "ASCII",
+                  "Component Version String" : "156.056.08.02",
+            }
+        ],
+
+    },
+  ]
+}
