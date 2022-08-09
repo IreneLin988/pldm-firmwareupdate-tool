@@ -1,4 +1,4 @@
-# PLDM_FW_UPDATE
+# PLDM Firmware Update
 Build Command:
     
     gcc main.c libpldm.a -lz -ljson-c -o test
