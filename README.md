@@ -1,4 +1,8 @@
 # PLDM Firmware Update
+Install json-c library:
+    
+    sudo apt-get install libjson0 libjson0-dev
+
 Build Command:
     
     gcc main.c libpldm.a -lz -ljson-c -o test
