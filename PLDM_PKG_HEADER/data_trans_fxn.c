@@ -6,6 +6,7 @@
 #include <time.h>
 #include "data_trans_fxn.h"
 
+#define str_type_num 6
 /*
   - uint8_t str_type(const char *input)
   - Name: string type
@@ -18,16 +19,23 @@
       * -1, get error(check input string)
 */
 
+
 uint8_t str_type(const char *input)
 {
     if(!input)
       return -1;
-		const char *str1 = "ASCII";
-		uint8_t str_type_val;
-    if(strcmp(str1, input) == 0)
-			str_type_val = 0x01;
+    const char *str[str_type_num] = {"Unknown","ASCII","UTF-8","UTF-16","UTF-16LE","UTF-16BE"};
 
-		return str_type_val;
+    uint8_t str_type_val;
+    int i = 0;
+    while(i < str_type_num){
+          if(strcmp(input, str[i]) == 0){
+            str_type_val = i;
+          }
+        i++;
+    }
+
+    return str_type_val;
 }
 
 int bit32_ctrl_1 (uint32_t *input, int bit)
@@ -112,27 +120,21 @@ int init_des_type(const char *input, uint16_t *output)
 {
     if(!input || !output)
       return -1;
-		const char *str1 = "PCI Vendor ID";
-    const char *str2 = "PCI Device ID";
-    const char *str3 = "PCI Subsystem Vendor ID";
-    const char *str4 = "PCI Subsystem ID";
-		uint16_t str_type_val;
-    uint16_t str_type_len;
-    if(strcmp(str1, input) == 0){
-			str_type_val = 0x0000;
-      str_type_len = 0x0002;
-    }else if(strcmp(str2, input) == 0){
-			str_type_val = 0x0100;
-      str_type_len = 0x0002;
-    }else if(strcmp(str3, input) == 0){
-			str_type_val = 0x0101;
-      str_type_len = 0x0002;
-    }else if(strcmp(str4, input) == 0){
-			str_type_val = 0x0102;
-      str_type_len = 0x0002;
+	const char *str[11] = { "PCI Vendor ID", "IANA Enterprise ID", "UUID", 
+	                        "PnP Vendor ID", "ACPI Vendor ID", "PCI Device ID",
+	                        "PCI Subsystem Vendor ID", "PCI Subsystem ID", "PCI Revision ID",
+	                        "PnP Product Identifier", "ACPI Product Identifier",
+	                       };
+	uint16_t str_val_len[11][2] = { {0x0000,2}, {0x0001,4}, {0x0002,16}, 
+	                                {0x0003,3}, {0x0004,4}, {0x0100,2}, 
+	                                {0x0101,2}, {0x0102,2}, {0x0103,1}, 
+	                                {0x0104,4}, {0x0105,4}};
+    for(int i=0; i<11; i++){
+        if(strcmp(str[i], input) == 0){
+	            output[0] =  str_val_len[i][0];
+              output[1] =  str_val_len[i][1];
+        }
     }
-		output[0] = str_type_val;
-    output[1] = str_type_len;
 
     return 0;
 }
@@ -181,16 +183,25 @@ uint16_t compo_class_val(const char *input)
 {
     if(!input)
       return -1;
-		const char *str1 = "Firmware";
-    const char *str2 = "Driver";
-		uint16_t str_type_val;
-    if(strcmp(str1, input) == 0)
-			str_type_val = 0x000A;
-    else if(strcmp(str2, input) == 0)
-			str_type_val = 0x0002;
+    const char *str[14] = { "Unknown","Other","Driver",
+                            "Configuration Software","Application Software",
+                            "Instrumentation","Firmware/BIOS","Diagnostic Software",
+                            "Operating System","Middleware",
+                            "Firmware","BIOS/FCode","Support/Service Pack","Software Bundle"
+                            };
 
-		return str_type_val;
+    uint8_t str_type_val;
+    int i = 0;
+    while(i < 14){
+        if(strcmp(input, str[i]) == 0){
+          str_type_val = i;
+        }
+        i++;
+    }
+
+    return str_type_val;
 }
+
 
 /*
   - uint16_t compo_opt_val(const char *input)
@@ -234,20 +245,16 @@ uint16_t act_meth_val(const char *input, uint16_t bit_val)
     if(!input)
       return -1;
 
-    const char *str1 = "Self-Contained";
-    const char *str2 = "Medium-specific reset";
-		const char *str3 = "System reboot";
-    const char *str4 = "DC power cycle";
-    const char *str5 = "AC power cycle";
-    if(strcmp(str1, input) == 0)
+    const char *str[5] = {"Self-Contained","Medium-specific reset","System reboot","DC power cycle","AC power cycle"};
+    if(strcmp(str[0], input) == 0)
 			bit16_ctrl_1(&bit_val, 1);
-    else if(strcmp(str2, input) == 0)
+    else if(strcmp(str[1], input) == 0)
 			bit16_ctrl_1(&bit_val, 2);
-    else if(strcmp(str3, input) == 0)
+    else if(strcmp(str[2], input) == 0)
 			bit16_ctrl_1(&bit_val, 3);
-    else if(strcmp(str4, input) == 0)
+    else if(strcmp(str[3], input) == 0)
 			bit16_ctrl_1(&bit_val, 4);
-    else if(strcmp(str5, input) == 0)
+    else if(strcmp(str[4], input) == 0)
 			bit16_ctrl_1(&bit_val, 5);
 
     return bit_val;
