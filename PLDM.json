@@ -11,7 +11,7 @@
         [
             {
                 "Component Image Set Version String Type" : "ASCII",
-                "Applicable Components" : [0,1],
+                "Applicable Components" : [1],
                 "Component Image Set Version String" : "145.02.01.01",
                 "Record Descriptors" :[{
                   "Initial Descriptor Type" : "PCI Vendor ID",

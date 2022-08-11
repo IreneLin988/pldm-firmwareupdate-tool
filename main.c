@@ -3,7 +3,6 @@
 #include <string.h>
 #include <zlib.h>
 #include <json-c/json.h>
-#include "data_trans_fxn.h"
 #include "pldmlib.h"
 
 json_pldm all;

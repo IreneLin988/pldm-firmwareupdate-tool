@@ -120,7 +120,7 @@ for(int j =0 ; j < dev_id_rec_count[0]; j++)
         {
           int dev = bit & -bit; //Get the smallest component by finding LSB
           dev = GetPowerNum(dev);
-          printf("    #%d Image in the PLDM payload \n", (dev + (8*i)));
+          //printf("    #%d Image in the PLDM payload \n", (dev + (8*i)));
           bit = bit ^ dev; //delete the target component
         }
       }
