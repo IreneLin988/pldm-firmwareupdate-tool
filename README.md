@@ -16,12 +16,8 @@ libpldm.a
     pkg_info.o
     FD_ID.o
     data_trans_fxn.o
-
-libparse.a
----------------------
-
-    $ ar -t libparse.a
     parse_PLDM_json.o
+
 
 Refer to PLDM for Firmware Update Specification DSP0267_1.0.0.pdf
 https://www.dmtf.org/documents/pmci/pldm-firmware-update-specification-100
