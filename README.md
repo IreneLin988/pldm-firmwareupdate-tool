@@ -10,7 +10,6 @@ BIN file name: PLDM_FW_PKG_Header.bin
 
 libpldm.a
 ---------------------
-This is a library which encoding PLDM messages from the user's json file.
     
     $ ar -t libpldm.a
     compo.o
@@ -20,7 +19,6 @@ This is a library which encoding PLDM messages from the user's json file.
 
 libparse.a
 ---------------------
-This is a library which decoding PLDM messages from the user's bin file.
 
     $ ar -t libparse.a
     parse_PLDM_json.o
