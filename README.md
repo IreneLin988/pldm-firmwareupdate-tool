@@ -3,9 +3,14 @@ Install json-c library:
     
     sudo apt-get install libjson0 libjson0-dev
 
-Build Command:
+Build Encode Command:
     
     gcc main.c libpldm.a -lz -ljson-c -o test
+
+Build Decode Command:
+    
+    gcc parse.c libparse.a -lz -ljson-c -o test
+
 BIN file name: PLDM_FW_PKG_Header.bin  
 
 libpldm.a
