@@ -95,7 +95,7 @@ for(int j =0 ; j < dev_id_rec_count[0]; j++)
         printf("%02x", p_device_id -> dev_update_opt_flag[i]);
       }
       printf("\n");
-
+      
       printf("Component Image Set Version String Type: ");
       str_type(p_device_id -> compo_image_setver_str_type[0]);
       printf("Component Image Set Version String Length: %02d bytes\n", p_device_id -> compo_image_setver_str_len[0]);
@@ -114,14 +114,14 @@ for(int j =0 ; j < dev_id_rec_count[0]; j++)
       free(p_compo_image_setver_str);
       printf("Applicable component:\n");
       for(i = 0; i < bitmap_len_byte ; i++)
-      {
-        int bit = p_applicable_compo[i];
+      { 
+        int bit = p_applicable_compo[i]; //Get the smallest component image map 
         while(bit)
-        {
-          int dev = bit & -bit; //Get the smallest component by finding LSB
+        { 
+          int dev = bit & -bit; //Get the smallest component image location by finding LSB
+          bit = bit ^ dev; //delete the seleted component image location
           dev = GetPowerNum(dev);
-          //printf("    #%d Image in the PLDM payload \n", (dev + (8*i)));
-          bit = bit ^ dev; //delete the target component
+          printf("    #%d Image in the PLDM payload \n", (dev + (8*i)));
         }
       }
       printf("The number of descriptors: %02d descriptors\n", p_device_id -> descriptor_count[0]);

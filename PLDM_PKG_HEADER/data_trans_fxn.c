@@ -29,10 +29,10 @@ uint8_t str_type(const char *input)
     uint8_t str_type_val;
     int i = 0;
     while(i < str_type_num){
-          if(strcmp(input, str[i]) == 0){
-            str_type_val = i;
-          }
-        i++;
+      if(strcmp(input, str[i]) == 0){
+        str_type_val = i;
+      }
+      i++;
     }
 
     return str_type_val;
