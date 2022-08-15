@@ -3,12 +3,12 @@ Install json-c library:
     
     sudo apt-get install libjson0 libjson0-dev
 
-Build Encode Command:
+Encode Command:
     
     make all
     make encode
 
-Build Decode Command:
+Decode Command:
     
     make decode
 
