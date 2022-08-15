@@ -5,11 +5,12 @@ Install json-c library:
 
 Build Encode Command:
     
-    gcc main.c libpldm.a -lz -ljson-c -o test
+    make all
+    make encode
 
 Build Decode Command:
     
-    gcc parse.c libparse.a -lz -ljson-c -o test
+    make decoe
 
 BIN file name: PLDM_FW_PKG_Header.bin  
 
