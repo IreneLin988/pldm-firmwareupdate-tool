@@ -1,7 +1,7 @@
 # PLDM Firmware Update
 Install json-c library:
     
-    sudo apt-get install libjson0 libjson0-dev
+    sudo apt install libjson-c-dev
 
 Encode Command:
     
