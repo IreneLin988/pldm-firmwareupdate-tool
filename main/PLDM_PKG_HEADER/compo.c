@@ -21,7 +21,7 @@ uint8_t *compo(int *compo_info_size, uint16_t *cur_size){
   *compo_info_size = 0;
 
   FILE *b_file;
-  b_file = fopen("pldm_payload.bin","wb");
+  b_file = fopen("image_payload.bin","wb");
   if(!b_file){
       perror("Failed\n");
       return NULL;
@@ -72,7 +72,7 @@ uint8_t *compo(int *compo_info_size, uint16_t *cur_size){
       return NULL;
     }
     fread(img_buf, b_compo_size[j], 1, read_file);
-    fwrite(img_buf, b_compo_size[j], 1, b_file);
+    fwrite(img_buf, b_compo_size[j], 1, b_file); //create image payload
     fclose(read_file);
     free(img_buf);
 
