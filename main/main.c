@@ -118,7 +118,7 @@ int main() {
   }
   fwrite(&crc, CHECKSUM_SIZE, 1, b_file);
 	fclose(b_file);
-  system("cat pldm_payload.bin >> PLDM_FW_PKG_Header.bin");
+  system("cat image_payload.bin >> PLDM_FW_PKG_Header.bin");
 
   return 0;
 }
