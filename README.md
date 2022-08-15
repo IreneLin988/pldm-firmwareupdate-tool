@@ -10,7 +10,7 @@ Build Encode Command:
 
 Build Decode Command:
     
-    make decoe
+    make decode
 
 BIN file name: PLDM_FW_PKG_Header.bin  
 
