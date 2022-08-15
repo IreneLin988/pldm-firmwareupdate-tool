@@ -53,7 +53,7 @@ uint8_t *compo(int *compo_info_size, uint16_t *cur_size){
     {
       l3.act_meth = json_object_array_get_idx(l3.req_compo_act_meth,i);
       b_meth_val = act_meth_val(json_object_get_string(l3.act_meth), b_meth_val);
-      printf("meth %x\n", b_meth_val );
+      // printf("method value: %x\n", b_meth_val ); Accumulation of the activation method value
     }
     const char *img_file = json_object_get_string(l3.compo_size);
     struct stat file_size;
@@ -94,13 +94,13 @@ uint8_t *compo(int *compo_info_size, uint16_t *cur_size){
                                                    sizeof(str)
                                                  };
     /* Cauculating the offset of the individual field for per component image information */
-    for (int i = 0; i < COMPO_IMG_INFO_FIELD-1; i++)
+    for (int i = 0; i < COMPO_IMG_INFO_FIELD-1; i++){
       field_offset[i+1] = field_offset[i] + field_offset[i+1];
+    }
     compo_img_info_len[j] = field_offset[COMPO_IMG_INFO_FIELD-1];
     *compo_info_size = *compo_info_size + field_offset[COMPO_IMG_INFO_FIELD-1];
     compo_img_info[j] = malloc(compo_img_info_len[j]);
-    if (!compo_img_info[j])
-    {
+    if (!compo_img_info[j]){
       printf("compo_img_info allocated failed");
       fclose(b_file);
       return NULL;
@@ -122,11 +122,11 @@ uint8_t *compo(int *compo_info_size, uint16_t *cur_size){
   *compo_info_size =  *compo_info_size + sizeof(b_compo_image_num);
   b_compo_offset = b_compo_offset + *compo_info_size + CHECKSUM_SIZE;
 
-  for(int j= 0; j < b_compo_image_num; j++)
+  for(int img_num = 0; img_num < b_compo_image_num; img_num++)
   {
-    printf("%d : %d\n",j, b_compo_offset );
-    memcpy(compo_img_info[j] + COMPO_LOCATION_FIELD_OFFSET, &b_compo_offset,  sizeof(b_compo_offset));
-    b_compo_offset = b_compo_offset + b_compo_size[j];
+    printf("#%d image started location: %x\n", img_num, b_compo_offset);
+    memcpy(compo_img_info[img_num] + COMPO_LOCATION_FIELD_OFFSET, &b_compo_offset,  sizeof(b_compo_offset));
+    b_compo_offset = b_compo_offset + b_compo_size[img_num];
   }
 
   uint32_t len = 0;

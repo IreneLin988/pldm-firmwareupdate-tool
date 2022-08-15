@@ -5,8 +5,8 @@
 #include <json-c/json.h>
 #include <time.h>
 #include "data_trans_fxn.h"
-
 #define str_type_num 6
+
 /*
   - uint8_t str_type(const char *input)
   - Name: string type
@@ -18,8 +18,6 @@
       * -value of string type
       * -1, get error(check input string)
 */
-
-
 uint8_t str_type(const char *input)
 {
     if(!input)
@@ -118,25 +116,27 @@ uint32_t update_opt_val(const char *input)
 
 int init_des_type(const char *input, uint16_t *output)
 {
-    if(!input || !output)
+  if(!input || !output){
       return -1;
+  }
 	const char *str[11] = { "PCI Vendor ID", "IANA Enterprise ID", "UUID", 
 	                        "PnP Vendor ID", "ACPI Vendor ID", "PCI Device ID",
 	                        "PCI Subsystem Vendor ID", "PCI Subsystem ID", "PCI Revision ID",
 	                        "PnP Product Identifier", "ACPI Product Identifier",
-	                       };
+	                      };
 	uint16_t str_val_len[11][2] = { {0x0000,2}, {0x0001,4}, {0x0002,16}, 
 	                                {0x0003,3}, {0x0004,4}, {0x0100,2}, 
 	                                {0x0101,2}, {0x0102,2}, {0x0103,1}, 
-	                                {0x0104,4}, {0x0105,4}};
-    for(int i=0; i<11; i++){
-        if(strcmp(str[i], input) == 0){
-	            output[0] =  str_val_len[i][0];
-              output[1] =  str_val_len[i][1];
-        }
-    }
+	                                {0x0104,4}, {0x0105,4}
+                                };
+  for(int i=0; i < 11; i++){
+      if(strcmp(str[i], input) == 0){
+            output[0] =  str_val_len[i][0];
+            output[1] =  str_val_len[i][1];
+      }
+  }
 
-    return 0;
+  return 0;
 }
 
 /*
@@ -153,12 +153,15 @@ int init_des_type(const char *input, uint16_t *output)
 int hexstr_tobin(char *input, uint8_t len, uint8_t *output, uint8_t size){
   char str[2];
   uint8_t j = 0;
-  if(!input || !output)
+  if(!input || !output){
     return -1;
-  if(size > (len/2))
+  }
+
+  if(size > (len/2)){
     return -1;
-  for (int i = 0; i < len; i+=2)
-  {
+  }
+
+  for (int i = 0; i < len; i+=2){
     memcpy(str, input + i, 2);
     output[j] = strtol(str,NULL,16);
     j++;
@@ -216,14 +219,14 @@ uint16_t compo_class_val(const char *input)
 
 uint16_t compo_opt_val(const char *input)
 {
-    if(!input)
+    if(!input){
       return -1;
-		const char *str1 = "Force Update";
-    const char *str2 = "Use Component Comparison Stamp";
+    }
+		const char *str[2] = {"Force Update","Use Component Comparison Stamp"};
 		uint16_t compo_opt_val;
-    if(strcmp(str1, input) == 0)
+    if(strcmp(str[0], input) == 0)
 			bit16_ctrl_1(&compo_opt_val, 0);
-    else if(strcmp(str2, input) == 0)
+    else if(strcmp(str[1], input) == 0)
 			bit16_ctrl_1(&compo_opt_val, 1);
 
 		return compo_opt_val;
@@ -245,17 +248,12 @@ uint16_t act_meth_val(const char *input, uint16_t bit_val)
     if(!input)
       return -1;
 
-    const char *str[5] = {"Self-Contained","Medium-specific reset","System reboot","DC power cycle","AC power cycle"};
-    if(strcmp(str[0], input) == 0)
-			bit16_ctrl_1(&bit_val, 1);
-    else if(strcmp(str[1], input) == 0)
-			bit16_ctrl_1(&bit_val, 2);
-    else if(strcmp(str[2], input) == 0)
-			bit16_ctrl_1(&bit_val, 3);
-    else if(strcmp(str[3], input) == 0)
-			bit16_ctrl_1(&bit_val, 4);
-    else if(strcmp(str[4], input) == 0)
-			bit16_ctrl_1(&bit_val, 5);
+    const char *str[6] = {"Automatic","Self-Contained","Medium-specific reset","System reboot","DC power cycle","AC power cycle"};
+    for(int i = 0; i < 6; i++){
+      if(strcmp(str[i], input) == 0){
+        bit16_ctrl_1(&bit_val, i);
+      }
+    }
 
     return bit_val;
 }
@@ -307,7 +305,7 @@ uint8_t *timestamp104(){
   str_tobin(t1,len,t2, sizeof(t2));
   year[0] = atoi(t1_y);
   year[1] = atoi(t1_y) >> 8;
-  printf("time: %s\n",t1);
+  // printf("time: %s\n",t1);
   memcpy(timestamp104, &tm,  sizeof(tm));
   memcpy(timestamp104 + 5, &t2,  sizeof(t2));
   memcpy(timestamp104 + 10, &year,  sizeof(year));

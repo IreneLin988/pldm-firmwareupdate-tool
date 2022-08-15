@@ -10,8 +10,9 @@ extern json_layer1 l1;
 
 uint8_t *pkg_info(int *pkg_info_size, uint16_t *compo_bitmap_len){
 
-  if ( !pkg_info_size  || !compo_bitmap_len)
+  if ( !pkg_info_size  || !compo_bitmap_len){
     return NULL;
+  }
   *pkg_info_size = 0;
   uint8_t PLDM_id[16] = { 0xF0, 0x18, 0x87, 0x8C, 0xCB, 0x7D, 0x49, 0x43, 0x98, 0x00, 0xA0, 0x2F,
                           0x05, 0x9A, 0xCA, 0x02 }; //Refer to different version of PLDM FW Update Spec
@@ -40,13 +41,12 @@ uint8_t *pkg_info(int *pkg_info_size, uint16_t *compo_bitmap_len){
                                                  sizeof(b_pkg_str_len),
                                                  sizeof(str)
                                                 };
-  for (int i = 0; i < PKG_HEADER_INFO_FIELD -1 ; i++)
+  for (int i = 0; i < PKG_HEADER_INFO_FIELD -1 ; i++){
     field_offset[i+1] = field_offset[i] + field_offset[i+1];
-
+  }
   *pkg_info_size = field_offset[PKG_HEADER_INFO_FIELD -1];
   uint8_t *pkg_header_info = malloc(*pkg_info_size * sizeof(uint8_t));
-  if (!pkg_header_info)
-  {
+  if (!pkg_header_info){
       printf("pkg_header_info allocated failed");
       return NULL;
   }
