@@ -5,7 +5,7 @@
 This project provides functionality for parsing and generating a PLDM firmware package header. It primarily parses a PLDM.json and creates a binary firmware package header file named PLDM_FW_PKG_Header.bin. In addition, it calculates the checksum for the header and appends it to the end of this binary file.
 
 To run this program, make sure you have the following dependencies installed on your system:
-1. A C compiler (e.g., GCC)
+1. C compiler (e.g., GCC)
 2. json-c
 
 Input
