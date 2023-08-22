@@ -48,3 +48,14 @@ libpldm.a
 
 Refer to PLDM for Firmware Update Specification DSP0267_1.0.0.pdf
 https://www.dmtf.org/documents/pmci/pldm-firmware-update-specification-100
+
+# Result:
+----------------------------------------------------------------------------
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/efabeefe-a06a-4c7d-8226-fdb00c48f08c)
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/5684b49a-4f46-42e6-b527-284087eb03cb)
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/6d1ffb13-6928-40af-9a38-19f222421cb4)
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/8bff0b1f-9b17-45b0-8477-f73388bec31f)
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/dcac495f-5226-466a-818c-a74867a09b6f)
+
+
+
