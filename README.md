@@ -2,14 +2,14 @@
 
 # PLDM Firmware package Header Generator
 
-This project facilitates the parsing and generation of a PLDM firmware package header. Starting with a PLDM.json file, the program translates the JSON data into a binary file named PLDM_FW_PKG_Header.bin. This binary represents the firmware package header, and already includes an appended checksum. Furthermore, if an image_payload.bin file is present, its content will be integrated into the PLDM_FW_PKG_Header.bin. Following this integration, the program recalculates the checksum for the entire Firmware package Header and embeds it at the end of PLDM_FW_PKG_Header.bin.
+This project offers the capability to parse and generate the PLDM firmware update header. Primarily, it decodes the PLDM.json file to produce a binary firmware update header file named PLDM_FW_PKG_Header.bin. This binary file is an encapsulated firmware update header. Furthermore, the content from the image_payload.bin file is appended to the created PLDM_FW_PKG_Header.bin, forming a complete PLDM firmware update package. Subsequently, the system calculates the CRC32 for the entire PLDM firmware update package and appends this CRC32 to the end of the header section within the package.
 
 # Overview
 Starting with a source file named PLDM.json, this generator will:
 1. Parse the JSON content to understand the structure and data it contains.
 2. Generate an intermediary binary file, PLDM_FW_PKG_Header.bin, representing the firmware package header from the parsed data.
 3. If an image_payload.bin file is present, its contents will be appended to PLDM_FW_PKG_Header.bin.
-4 Finally, the utility calculates the checksum for the entire firmware package header, ensuring data integrity and appends it to the end of PLDM_FW_PKG_Header.bin.
+4 Finally, the utility calculates the checksum for the entire firmware update package, ensuring data integrity and appends it to the end of PLDM_FW_PKG_Header.bin.
 
 # Key Features
 ### Structured Input: 
