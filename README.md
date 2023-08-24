@@ -2,54 +2,95 @@
 
 # PLDM Firmware package Header Generator
 
-This project provides functionality for parsing and generating a PLDM firmware package header. It primarily parses a PLDM.json and creates a binary firmware package header file named PLDM_FW_PKG_Header.bin. In addition, it calculates the checksum for the header and appends it to the end of this binary file.
+This project facilitates the parsing and generation of a PLDM firmware package header. Starting with a PLDM.json file, the program translates the JSON data into a binary file named PLDM_FW_PKG_Header.bin. This binary represents the firmware package header, and already includes an appended checksum. Furthermore, if an image_payload.bin file is present, its content will be integrated into the PLDM_FW_PKG_Header.bin. Following this integration, the program recalculates the checksum for the entire Firmware package Header and embeds it at the end of PLDM_FW_PKG_Header.bin.
 
-To run this program, make sure you have the following dependencies installed on your system:
-1. C compiler (e.g., GCC)
-2. json-c
+# Overview
+Starting with a source file named PLDM.json, this generator will:
+1. Parse the JSON content to understand the structure and data it contains.
+2. Generate an intermediary binary file, PLDM_FW_PKG_Header.bin, representing the firmware package header from the parsed data.
+3. If an image_payload.bin file is present, its contents will be appended to PLDM_FW_PKG_Header.bin.
+4 Finally, the utility calculates the checksum for the entire firmware package header, ensuring data integrity and appends it to the end of PLDM_FW_PKG_Header.bin.
 
-Input
-The program expects a file named PLDM.json in the same directory to serve as input. Additionally, there should be a image_payload.bin file, the content of which will be appended to the generated firmware package header.
+# Key Features
+### Structured Input: 
+The program anticipates a standardized JSON format in PLDM.json, enabling users to easily modify or expand their firmware data.
 
-Output
-The program will produce PLDM_FW_PKG_Header.bin, which is the encoded firmware package header with the checksum appended at the end.
+### Binary Generation: 
+It skillfully crafts a binary representation of the package header, optimized for firmware applications.
 
-Notes
+### Payload Integration: 
+Upon detecting an image_payload.bin, the utility effortlessly incorporates its content to the resulting binary header.
+
+### Checksum Calculation: 
+To ensure the integrity of the data, a checksum is calculated for the entire package header and subsequently appended to the PLDM_FW_PKG_Header.bin file.
+
+## How to Use
+1. Place your PLDM.json and optionally, image_payload.bin, in the project's directory.
+2. Run the utility.
+3. Once completed, retrieve the PLDM_FW_PKG_Header.bin with the appended checksum.
+This streamlined process ensures quick turnaround times, allowing firmware developers to focus on their core functionalities while trusting the integrity and accuracy of their package headers.
+
+## Prerequisites
+Ensure the following are set up on your system before proceeding:
+
+(1) C compiler: For instance, GCC.
+
+(2) json-c: A JSON library for C.
+
+(3) Files:
+        (i) PLDM.json: This should be present in the same directory as the program, serving as the input.
+        (ii) image_payload.bin: This file's content will be appended to the generated firmware package header.
+## Important Notes
 Ensure PLDM.json and image_payload.bin are located in the same directory.
 Install all necessary dependencies before running the program.
 
-# How to Run
-Install json-c library:
+## Input
+The program expects a file named PLDM.json in the same directory to serve as input. Additionally, there should be a image_payload.bin file, the content of which will be appended to the generated firmware package header.        
+
+## Output
+Upon successful execution, the utility generates:
+-> PLDM_FW_PKG_Header.bin: This is the binary representation of the firmware package header, inclusive of the appended checksum.
+
+
+## Usage
+### Installation
+For the json-c library:
     
     sudo apt install libjson-c-dev
 
-Encode Command:
-Upon execution, the program will produce PLDM_FW_PKG_Header.bin.
+### Encoding 
+To generate the PLDM_FW_PKG_Header.bin:
     
     make all
     make encode
 
-Decode Command:
-    
+### Decoding:
+To decode the generated file:
     make decode
 
 BIN file name: PLDM_FW_PKG_Header.bin  
 
-libpldm.a
----------------------
+### Details of the libpldm.a Library
+You can view the object files within the libpldm.a static library using:
     
     $ ar -t libpldm.a
-    compo.o
-    pkg_info.o
-    FD_ID.o
-    data_trans_fxn.o
-    parse_PLDM_json.o
+
+#### Contained objects:
+1. compo.o
+2. pkg_info.o
+3. FD_ID.o
+4. data_trans_fxn.o
+5. parse_PLDM_json.o
 
 
-Refer to PLDM for Firmware Update Specification DSP0267_1.0.0.pdf
-https://www.dmtf.org/documents/pmci/pldm-firmware-update-specification-100
+## Additional Resources
+For more information on the PLDM firmware update specification, refer to the document: 
+PLDM for Firmware Update Specification DSP0267_1.0.0.pdf:
 
-# Result:
+https://www.dmtf.org/sites/default/files/standards/documents/DSP0267_1.0.0.pdf
+
+
+## Result:
 ----------------------------------------------------------------------------
 ![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/efabeefe-a06a-4c7d-8226-fdb00c48f08c)
 ![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/5684b49a-4f46-42e6-b527-284087eb03cb)
