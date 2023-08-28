@@ -50,7 +50,8 @@ The program expects a file named PLDM.json in the same directory to serve as inp
 
 ## Output
 Upon successful execution, the utility generates:
--> PLDM_FW_PKG_Header.bin: This is the binary representation of the firmware package header, inclusive of the appended checksum.
+-> pldm_update_header.bin: This is the binary representation of the firmware header, inclusive of the appended checksum.
+-> pldm_update_pkg.bin: This is the binary representation of the entire firmware package, inclusive of the appended image_payload.bin.
 
 
 ## Usage
