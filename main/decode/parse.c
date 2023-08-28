@@ -22,7 +22,7 @@ int main(){
   uint16_t pkg_header_size;
 
   FILE *b_file;
-	b_file = fopen("PLDM_FW_PKG_Header.bin","rb");
+	b_file = fopen("pldm_update_header.bin","rb");
   fseek(b_file, 17, SEEK_SET);
   fread(&pkg_header_size, sizeof(pkg_header_size), 1, b_file);
   fseek(b_file, 0L, SEEK_SET);
