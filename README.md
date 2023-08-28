@@ -2,14 +2,14 @@
 
 # PLDM Firmware package Header Generator
 
-This project offers the capability to parse and generate the PLDM firmware update header. Primarily, it decodes the PLDM.json file to produce a binary firmware update header file named PLDM_FW_PKG_Header.bin. This binary file is an encapsulated firmware update header. Furthermore, the content from the image_payload.bin file is appended to the created PLDM_FW_PKG_Header.bin, forming a complete PLDM firmware update package. Subsequently, the system calculates the CRC32 for the entire PLDM firmware update package and appends this CRC32 to the end of the header section within the package.
+This project offers the capability to parse and generate the PLDM firmware update header. Primarily, it decodes the PLDM.json file to produce a binary firmware update header file named pldm_update_header.bin. This binary file is an encapsulated firmware update header. Subsequently, the system calculates the CRC32 for the entire PLDM firmware update header and appends this CRC32 to the end of the header section within the package. Finally, the content from the image_payload.bin file is appended to the created pldm_update_header.bin, forming a complete PLDM firmware update package
 
 # Overview
 Starting with a source file named PLDM.json, this generator will:
 1. Parse the JSON content to understand the structure and data it contains.
 2. Generate an intermediary binary file, PLDM_FW_PKG_Header.bin, representing the firmware package header from the parsed data.
-3. If an image_payload.bin file is present, its contents will be appended to PLDM_FW_PKG_Header.bin.
-4 Finally, the utility calculates the checksum for the entire firmware update package, ensuring data integrity and appends it to the end of PLDM_FW_PKG_Header.bin.
+3. If an image_payload.bin file is present, its contents will be appended to pldm_update_header.bin
+4 Finally, the utility generates Pldm Firmware Update Package file "pldm_update_pkg.bin ".
 
 # Key Features
 ### Structured Input: 
@@ -18,11 +18,11 @@ The program anticipates a standardized JSON format in PLDM.json, enabling users 
 ### Binary Generation: 
 It skillfully crafts a binary representation of the package header, optimized for firmware applications.
 
+### Checksum Calculation: 
+To ensure the integrity of the data, a checksum is calculated for the entire package header and subsequently appended to the pldm_update_header.bin file.
+
 ### Payload Integration: 
 Upon detecting an image_payload.bin, the utility effortlessly incorporates its content to the resulting binary header.
-
-### Checksum Calculation: 
-To ensure the integrity of the data, a checksum is calculated for the entire package header and subsequently appended to the PLDM_FW_PKG_Header.bin file.
 
 ## How to Use
 1. Place your PLDM.json and optionally, image_payload.bin, in the project's directory.
@@ -38,6 +38,7 @@ Ensure the following are set up on your system before proceeding:
 (2) json-c: A JSON library for C.
 
 (3) Files:
+
         (i) PLDM.json: This should be present in the same directory as the program, serving as the input.
         (ii) image_payload.bin: This file's content will be appended to the generated firmware package header.
 ## Important Notes
@@ -64,11 +65,28 @@ To generate the PLDM_FW_PKG_Header.bin:
     make all
     make encode
 
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/3168a588-b750-4157-8a1a-c09a56324a77)
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/bf9a6505-9c90-46b1-a966-17715edf0ff9)
+
+
 ### Decoding:
 To decode the generated file:
+
+
     make decode
 
-BIN file name: PLDM_FW_PKG_Header.bin  
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/01490ea7-1c65-4ba3-87b0-20c350b4496c)
+
+
+ ### Pldm Firmware Update Package file name: pldm_update_pkg.bin  
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/ae13fd83-fa27-45e1-8870-36d22cf1d68c)
+
+### clear:
+To clean the generated file:
+
+        make clean
+![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/093990a6-d5fd-4d96-b5e1-354e8d0c6f6c)
+
 
 ### Details of the libpldm.a Library
 You can view the object files within the libpldm.a static library using:
@@ -89,14 +107,6 @@ PLDM for Firmware Update Specification DSP0267_1.0.0.pdf:
 
 https://www.dmtf.org/sites/default/files/standards/documents/DSP0267_1.0.0.pdf
 
-
-## Result:
-----------------------------------------------------------------------------
-![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/efabeefe-a06a-4c7d-8226-fdb00c48f08c)
-![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/5684b49a-4f46-42e6-b527-284087eb03cb)
-![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/6d1ffb13-6928-40af-9a38-19f222421cb4)
-![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/8bff0b1f-9b17-45b0-8477-f73388bec31f)
-![image](https://github.com/quanta-Irenelin/PLDM_FW_UPDATE/assets/85274528/dcac495f-5226-466a-818c-a74867a09b6f)
 
 
 
