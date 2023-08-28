@@ -70,7 +70,7 @@ int main() {
   /* Writing the whole package header size(included checksum field) into the PKG Header INFO AREA */
   memcpy(pkg_info_buf + PKG_HEADER_SIZE_OFFSET, &cur_size, sizeof(cur_size));
   FILE *b_file;
-	b_file = fopen("PLDM_FW_PKG_Header.bin","wb");
+	b_file = fopen("pldm_update_header.bin","wb");
   if(!b_file){
     perror("Failed\n");
     free(compo_info_buf);
@@ -78,7 +78,7 @@ int main() {
     free(fd_id_buf);
     return 1;
   }
-  printf("Create the PLDM_FW_PKG_Header.bin successfully\n");
+  printf("Create the pldm_update_header.bin successfully\n");
 
   fwrite(pkg_info_buf, pkg_info_size, 1, b_file);
   free(pkg_info_buf);
@@ -90,7 +90,7 @@ int main() {
 
   /* Calculating the Checksum of PLDM Firmware package header*/
   /* NOTICE: It did NOT include the checksum field           */
-	b_file = fopen("PLDM_FW_PKG_Header.bin","rb");
+	b_file = fopen("pldm_update_header.bin","rb");
   if(!b_file){
     perror("Failed\n");
     return 1;
@@ -111,15 +111,15 @@ int main() {
   free(pldm);
 
   /* Writing the checksum(4 Bytes) into the end of PLDM FW PKG Header*/
-	b_file = fopen("PLDM_FW_PKG_Header.bin","ab");
+	b_file = fopen("pldm_update_header.bin","ab");
   if(!b_file){
     perror("Failed\n");
     return 1;
   }
   fwrite(&crc, CHECKSUM_SIZE, 1, b_file);
-	fclose(b_file);
-  system("cat image_payload.bin >> PLDM_FW_PKG_Header.bin");
-
+	fclose(b_file); 
+  system("cp pldm_update_header.bin pldm_update_pkg.bin && cat image_payload.bin >> pldm_update_pkg.bin");
+  
   return 0;
 }
 

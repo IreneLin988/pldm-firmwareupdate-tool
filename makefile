@@ -7,7 +7,7 @@ decode:
 	(cd $(SUBDIRS_decode) && make);
 	(cd main/decode && ./pldm_decode.exe);
 encode:
-	(cd main && ./pldm_encode.exe);
+	(cd main && ./pldm_encode.exe && make mv_file);
 clean:
 	(cd $(SUBDIRS) && make clean);
 	(cd main && make clean); 

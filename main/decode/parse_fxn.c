@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <json-c/json.h>
 #include <time.h>
-#include "parse_fw_update.h"
 #define id(k, v) [v] = #k,
 
 const char  *const des_name_table[] = { id(PCI Vendor ID, 0x0000) id(IANA Enterprise ID, 0x0001) id(UUID, 0x0002) 
